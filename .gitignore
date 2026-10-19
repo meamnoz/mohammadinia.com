@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+Thumbs.db
+
+# Internal project planning notes; keep out of the public source repository.
+CONTENT_TODO.md
+DESIGN_SYSTEM.md
+HERO_NAV_DIRECTION.md
+PROJECT_CONTEXT.md
+REMAINING_SECTIONS.md
+ROADMAP.md
+SERVICES_DESIGN.md
+UX_WIREFRAME.md

@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'خدمات صنعتی محمدی‌نیا | طراحی قالب و تولید قطعات',
+  description = 'طراحی و ساخت قالب صنعتی، پرس‌کاری، ماشین‌کاری CNC و تولید قطعات سفارشی در خدمات صنعتی محمدی‌نیا.',
+} = Astro.props;
+const siteUrl = Astro.site ?? new URL('https://mohammadinia.com');
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImageUrl = new URL('/images/equipment/cnc-0058.jpg', siteUrl).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      name: 'خدمات صنعتی محمدی‌نیا',
+      url: siteUrl.href,
+      email: 'info@mohamadinia.com',
+    },
+    {
+      '@type': 'WebSite',
+      name: 'خدمات صنعتی محمدی‌نیا',
+      url: siteUrl.href,
+      inLanguage: 'fa-IR',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="preload" href="/fonts/IRANSansX-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/IRANSansX-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:site_name" content="خدمات صنعتی محمدی‌نیا" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
