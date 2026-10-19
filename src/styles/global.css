@@ -81,6 +81,7 @@ button { cursor: pointer; }
   top: 0;
   right: 0;
   left: var(--rail-width);
+  justify-content: flex-end;
   display: flex;
   height: var(--header-height);
   align-items: center;
@@ -312,7 +313,7 @@ service-detail__copy h2 { margin: .45rem 0 0; font-size: clamp(1.6rem, 3vw, 2.3r
 
 @media (max-width: 760px) {
   :root { --header-height: 70px; --rail-width: 0px; }
-  .site-header { left: 0; padding-inline: 1rem; }
+  .site-header { left: 0; padding-inline: 1rem; justify-content: flex-start; }
   .brand-mark { width: 42px; height: 42px; }
   .brand-name { font-size: .88rem; }
   .site-rail { display: none; }
