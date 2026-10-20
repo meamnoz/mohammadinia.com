@@ -45,8 +45,12 @@ const portfolio = [
         <header class="section-heading">
           <div><p class="eyebrow">آنچه انجام می‌دهیم</p><h2 id="services-title">خدمات ما</h2></div>
           <p>از ایده و طراحی تا ساخت قطعه؛ برای هر مرحله از مسیر تولید، همراه شما هستیم.</p>
+          <div class="project-controls service-controls" role="group" aria-label="ناوبری خدمات">
+            <button type="button" data-service-scroll="-1" aria-label="خدمت قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
+            <button type="button" data-service-scroll="1" aria-label="خدمت بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
+          </div>
         </header>
-        <div class="service-cards">
+        <div class="service-cards" id="service-track">
           {services.map((service, index) => (
             <details class="service-item" id={`service-${service.id}`} data-service-details>
               <summary>
@@ -76,7 +80,7 @@ const portfolio = [
       <div class="section-shell">
         <header class="section-heading">
           <div><p class="eyebrow">از نزدیک ببینید</p><h2 id="projects-title">نمونه‌کارها</h2></div>
-          <div class="project-controls" aria-label="ناوبری نمونه‌کارها"><button type="button" data-project-scroll="-1" aria-label="نمونه‌کار قبلی">←</button><button type="button" data-project-scroll="1" aria-label="نمونه‌کار بعدی">→</button></div>
+          <div class="project-controls" role="group" aria-label="ناوبری نمونه‌کارها"><button type="button" data-project-scroll="-1" aria-label="نمونه‌کار قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button><button type="button" data-project-scroll="1" aria-label="نمونه‌کار بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button></div>
         </header>
         <div class="project-grid" id="project-track">
           {portfolio.map((project, index) => (
@@ -167,10 +171,15 @@ const portfolio = [
     });
     if (location.hash.startsWith('#service-')) openService(location.hash.slice('#service-'.length), undefined, false);
 
-    document.querySelectorAll<HTMLButtonElement>('[data-project-scroll]').forEach((button) => button.addEventListener('click', () => {
-      const track = document.querySelector<HTMLElement>('#project-track');
-      const card = track?.querySelector<HTMLElement>('.project-card');
-      if (track && card) track.scrollBy({ left: Number(button.dataset.projectScroll) * (card.offsetWidth + 28), behavior: 'smooth' });
+    document.querySelectorAll<HTMLButtonElement>('[data-service-scroll], [data-project-scroll]').forEach((button) => button.addEventListener('click', () => {
+      const isService = button.hasAttribute('data-service-scroll');
+      const track = document.querySelector<HTMLElement>(isService ? '#service-track' : '#project-track');
+      const card = track?.firstElementChild as HTMLElement | null;
+      if (!track || !card) return;
+      const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
+      const rtlDirection = getComputedStyle(track).direction === 'rtl' ? -1 : 1;
+      const movement = Number(button.dataset.serviceScroll ?? button.dataset.projectScroll) * (card.offsetWidth + gap) * rtlDirection;
+      track.scrollBy({ left: movement, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }));
 
     const sectionLinks = document.querySelectorAll<HTMLAnchorElement>('.rail-links a[href^="#"], .mobile-nav a[href^="#"]');
