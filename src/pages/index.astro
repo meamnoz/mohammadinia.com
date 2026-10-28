@@ -42,37 +42,25 @@ const portfolio = [
     </section>
 
     <section class="services full-section" id="services" aria-labelledby="services-title">
-      <div class="section-shell">
-        <header class="section-heading">
-          <div><p class="eyebrow">آنچه انجام می‌دهیم</p><h2 id="services-title">خدمات ما</h2></div>
-          <p>از ایده و طراحی تا ساخت قطعه؛ برای هر مرحله از مسیر تولید، همراه شما هستیم.</p>
-          <div class="project-controls service-controls" role="group" aria-label="ناوبری خدمات">
-            <button type="button" data-service-scroll="-1" aria-label="خدمت قبلی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
-            <button type="button" data-service-scroll="1" aria-label="خدمت بعدی"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
-          </div>
+      <div class="services__shell">
+        <header class="services__heading">
+          <h2 id="services-title">خدمات ما</h2>
         </header>
-        <div class="service-cards" id="service-track">
-          {services.map((service, index) => (
-            <details class="service-item" id={`service-${service.id}`} data-service-details>
-              <summary>
-                <span class="service-card__image"><img src={equipmentImages[index % equipmentImages.length].src} alt="" loading="lazy" /></span>
-                <span class="service-card__body"><strong class="service-item__title">{service.title}</strong><span class="service-item__description">{service.shortDescription}</span><span class="service-item__open">توضیحات <span aria-hidden="true">↗</span></span></span>
-              </summary>
-              <div class="service-detail-content">
-                <img class="service-detail__image" src={equipmentImages[index % equipmentImages.length].src} alt={`تصویری مرتبط با ${service.title}`} loading="lazy" />
-                <div class="service-detail__copy">
-                  <p class="eyebrow">خدمات صنعتی محمدی‌نیا</p>
-                  <h2>{service.title}</h2>
-                  <p class="service-dialog__intro">{service.description}</p>
-                  <div class="service-dialog__columns">
-                    <div><h3>توانمندی‌ها</h3><ul>{service.capabilities.map((item) => <li>{item}</li>)}</ul></div>
-                    <div><h3>صنایع مرتبط</h3><ul>{service.industries.map((item) => <li>{item}</li>)}</ul></div>
-                  </div>
-                  <a class="button button--primary" href="#contact">درخواست مشاوره <span aria-hidden="true">←</span></a>
-                </div>
-              </div>
-            </details>
-          ))}
+        <div class="services-tabs" role="tablist" aria-label="انتخاب خدمت">
+          <button class="services-tabs__button is-active" id="service-tab-design" type="button" role="tab" aria-selected="true" aria-controls="service-panel-design" data-service-tab="design">طراحی</button>
+          <button class="services-tabs__button" id="service-tab-build" type="button" role="tab" aria-selected="false" aria-controls="service-panel-build" data-service-tab="build" tabindex="-1">ساخت</button>
+          <button class="services-tabs__button" id="service-tab-test" type="button" role="tab" aria-selected="false" aria-controls="service-panel-test" data-service-tab="test" tabindex="-1">آزمایش</button>
+        </div>
+        <div class="services-panels">
+          <section class="service-panel is-active" id="service-panel-design" role="tabpanel" aria-labelledby="service-tab-design" style="--service-image: url('/images/services/design.png'); --service-position: center">
+            <div class="service-panel__copy"><p class="eyebrow">خدمات صنعتی محمدی‌نیا</p><h3>طراحی</h3><p>هر پروژه با یک نیاز فنی شروع می‌شود؛ گاهی نقشه آماده است و گاهی باید مسیر ساخت از ابتدا روشن شود. ما با بررسی نیاز، نقشه یا نمونه و ارائهٔ مشاورهٔ فنی، طراحی را با روش تولید هماهنگ می‌کنیم. توانمندی‌های این بخش شامل طراحی قطعات صنعتی و طراحی قالب‌های سنبه برای کشش عمیق، ماتریس برای برش و خم، و قالب‌های ترکیبی برای اجرای چند مرحلهٔ شکل‌دهی است.</p></div>
+          </section>
+          <section class="service-panel" id="service-panel-build" role="tabpanel" aria-labelledby="service-tab-build" style="--service-image: url('/images/services/build.png'); --service-position: 38% center" hidden>
+            <div class="service-panel__copy"><p class="eyebrow">خدمات صنعتی محمدی‌نیا</p><h3>ساخت</h3><p>وقتی طرح آماده شد، نوبت ساخت و تولید است. ما قابلیت‌های قالب‌سازی، پرس‌کاری ورق و فرزکاری CNC را در یک مجموعه دنبال می‌کنیم: ساخت قالب‌های سنبه، ماتریس و ترکیبی؛ پرس‌کاری ضربه‌ای و هیدرولیک؛ و فرزکاری CNC سه‌محور و چهارمحور. کنار هم بودن این توانمندی‌ها کمک می‌کند مسیر ساخت قالب و تولید قطعه را پیوسته پیش ببریم.</p></div>
+          </section>
+          <section class="service-panel" id="service-panel-test" role="tabpanel" aria-labelledby="service-tab-test" style="--service-image: url('/images/services/testing.png'); --service-position: 38% center" hidden>
+            <div class="service-panel__copy"><p class="eyebrow">خدمات صنعتی محمدی‌نیا</p><h3>آزمایش</h3><p>برای انتخاب روش ساخت، شناخت رفتار و ویژگی‌های ماده هم اهمیت دارد. از طریق همکاری مستقیم با آزمایشگاه متالورژی دانشگاه صنعتی شریف، خدمات متالوگرافی، آنالیز شیمیایی، آزمون‌های کشش و خستگی و بیش از ۱۸۰ آزمون دیگر متناسب با نیاز صنعت را ارائه می‌کنیم. ما نمایندهٔ رسمی آزمایشگاه متالورژی این دانشگاه هستیم و آزمون‌ها در آزمایشگاه دانشگاه انجام می‌شوند.</p></div>
+          </section>
         </div>
       </div>
     </section>
@@ -120,57 +108,34 @@ const portfolio = [
     </section>
   </main>
 
-  <dialog class="service-dialog" id="service-dialog" aria-label="جزئیات خدمت">
-    <button class="service-dialog__close" type="button" aria-label="بستن جزئیات">×</button>
-    <div class="service-dialog__body" id="service-dialog-body"></div>
-  </dialog>
 
   <script>
-    const dialog = document.querySelector<HTMLDialogElement>('#service-dialog');
-    const dialogBody = document.querySelector<HTMLElement>('#service-dialog-body');
-    const closeButton = document.querySelector<HTMLButtonElement>('.service-dialog__close');
-    let opener: HTMLElement | null = null;
-    let pushedModalHistory = false;
-
-    function openService(id: string, source?: HTMLElement, updateHistory = false) {
-      const details = document.getElementById(`service-${id}`) as HTMLDetailsElement | null;
-      const content = details?.querySelector<HTMLElement>('.service-detail-content');
-      if (!dialog || !dialogBody || !details || !content) return;
-      opener = source ?? details.querySelector('summary');
-      dialogBody.replaceChildren(content.cloneNode(true));
-      const title = dialogBody.querySelector('h2');
-      if (title) { title.id = 'service-dialog-title'; dialog.setAttribute('aria-labelledby', title.id); }
-      details.open = false;
-      if (!dialog.open) dialog.showModal();
-      if (updateHistory) { history.pushState({ serviceDialog: true }, '', `#service-${id}`); pushedModalHistory = true; }
-      closeButton?.focus();
-    }
-
-    function closeService(useHistory = true) {
-      if (!dialog?.open) return;
-      dialog.close();
-      if (pushedModalHistory && useHistory) { pushedModalHistory = false; history.back(); }
-      else if (location.hash.startsWith('#service-')) history.replaceState(history.state, '', `${location.pathname}${location.search}`);
-      opener?.focus();
-    }
-
-    dialogBody?.addEventListener('click', (event) => {
-      const target = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href="#contact"]') : null;
-      if (!target) return;
-      event.preventDefault(); closeService(false); history.pushState({}, '', '#contact');
-      document.querySelector('#contact')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    const serviceTabs = [...document.querySelectorAll<HTMLButtonElement>('[data-service-tab]')];
+    const servicePanels = [...document.querySelectorAll<HTMLElement>('[role="tabpanel"][id^="service-panel-"]')];
+    const activateServiceTab = (tab: HTMLButtonElement, focus = false) => {
+      serviceTabs.forEach((item) => {
+        const selected = item === tab;
+        item.classList.toggle('is-active', selected);
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+      });
+      servicePanels.forEach((panel) => {
+        const selected = panel.id === tab.getAttribute('aria-controls');
+        panel.hidden = !selected;
+        panel.classList.toggle('is-active', selected);
+      });
+      if (focus) tab.focus();
+    };
+    serviceTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activateServiceTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? serviceTabs.length - 1 :
+          (index + (event.key === 'ArrowLeft' ? 1 : -1) + serviceTabs.length) % serviceTabs.length;
+        activateServiceTab(serviceTabs[next], true);
+      });
     });
-    document.querySelectorAll<HTMLDetailsElement>('[data-service-details]').forEach((details) => details.addEventListener('toggle', () => {
-      if (details.open) openService(details.id.replace('service-', ''), details.querySelector('summary') ?? undefined, true);
-    }));
-    closeButton?.addEventListener('click', () => closeService());
-    dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeService(); });
-    dialog?.addEventListener('close', () => opener?.focus());
-    window.addEventListener('popstate', () => {
-      if (location.hash.startsWith('#service-')) openService(location.hash.slice('#service-'.length), undefined, false);
-      else if (dialog?.open) { pushedModalHistory = false; closeService(false); }
-    });
-    if (location.hash.startsWith('#service-')) openService(location.hash.slice('#service-'.length), undefined, false);
 
     document.querySelectorAll<HTMLButtonElement>('[data-service-scroll], [data-project-scroll]').forEach((button) => button.addEventListener('click', () => {
       const isService = button.hasAttribute('data-service-scroll');
